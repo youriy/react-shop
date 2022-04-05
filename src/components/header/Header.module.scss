@@ -1,0 +1,67 @@
+@import "src/scss/app";
+
+.header {
+  @extend %container;
+  height: 113px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: hsl(220, 14%, 75%) 2px solid;
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 500;
+    color: #727377;
+  }
+
+  &__navitem {
+    margin: 0 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 97%;
+    border-bottom: 5px transparent solid;
+
+    &:hover {
+      color: black;
+      border-bottom: 5px $orange-color solid;
+    }
+  }
+
+  &__logo {
+    margin-right: 58px;
+  }
+
+  &__userimg {
+    height: 50px;
+    width: auto;
+    cursor: pointer;
+    border: transparent solid;
+    border-radius: 30px;
+
+    &:hover {
+      border: $orange-color solid;
+    }
+  }
+
+  &__cart {
+    margin-right: 46px;
+    cursor: pointer;
+  }
+}
+
+.bucket__title {
+  padding: 26px;
+  font-weight: 700;
+  width: 360px;
+  border-bottom: hsl(220, 14%, 75%) 1px solid;
+}
+
+.bucket__body {
+  padding: 26px;
+  height: 188px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

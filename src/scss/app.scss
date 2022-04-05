@@ -1,0 +1,56 @@
+@import "colors";
+
+body {
+  margin: 0;
+  font-family: 'Kumbh Sans', sans-serif;
+}
+
+%container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+
+.carousel {
+
+  .thumbs {
+    padding: 0;
+
+    .thumb:not(:first-child) {
+      margin: 0 15px;
+    }
+
+    .thumb{
+      padding: 0!important;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .thumb:hover {
+      border-color: $orange-color;
+    }
+
+    .selected {
+      border-radius: 15px;
+      border-color: $orange-color;
+
+      img {
+        opacity: 0.5;
+      }
+    }
+
+  }
+
+  .thumbs-wrapper {
+    margin: 0!important;
+
+    img {
+      border-radius: 10px;
+    }
+  }
+
+  .slide img {
+    border-radius: 20px;
+  }
+}
