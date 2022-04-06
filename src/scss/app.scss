@@ -14,6 +14,10 @@ body {
 
 .carousel {
 
+  .slide {
+    z-index: 0!important;
+  }
+
   .thumbs {
     padding: 0;
 
