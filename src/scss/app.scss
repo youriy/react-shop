@@ -14,21 +14,26 @@ body {
 
 .carousel {
 
-  .slide {
-    z-index: 0!important;
+  .slider-wrapper {
+
+    .selected {
+      z-index: 0!important;
+      cursor: pointer;
+    }
   }
 
   .thumbs {
     padding: 0;
 
     .thumb:not(:first-child) {
-      margin: 0 15px;
+      margin: 0 14px;
     }
 
-    .thumb{
+    .thumb {
       padding: 0!important;
       border-radius: 15px;
       cursor: pointer;
+      width: 93px!important;
     }
 
     .thumb:hover {

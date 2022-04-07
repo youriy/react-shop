@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Header.module.scss';
 import Popover from '@mui/material/Popover';
+import IconButton from '@mui/material/IconButton';
 
 const navItems = [
     'Collections',
@@ -30,12 +31,12 @@ const Header = () => {
                 <div className={classes.header__logo}>
                    <img src="img/logo.svg"/>
                 </div>
-                {navItems.map(value => <div className={classes.header__navitem}>{value}</div>)}
+                {navItems.map(value => <div key={value} className={classes.header__navitem}>{value}</div>)}
             </div>
             <div className={classes.header__nav}>
-                <div className={classes.header__cart} aria-describedby={id} onClick={handleClick}>
+                <IconButton className={classes.header__cart} aria-describedby={id} onClick={handleClick}>
                     <img src="img/icon-cart.svg"/>
-                </div>
+                </IconButton>
                 <div>
                     <img className={classes.header__userimg} src="img/image-avatar.png"/>
                 </div>

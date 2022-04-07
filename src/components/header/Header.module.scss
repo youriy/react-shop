@@ -12,7 +12,7 @@
     align-items: center;
     height: 100%;
     font-weight: 500;
-    color: #727377;
+    color: $grey-color;
   }
 
   &__navitem {
@@ -46,7 +46,7 @@
   }
 
   &__cart {
-    margin-right: 46px;
+    margin-right: 46px!important;
     cursor: pointer;
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Main.module.scss';
 import {Slider} from "./Slider.jsx";
+import {Description} from "./Description.jsx"
 
 const Main = () => {
 
@@ -8,6 +9,7 @@ const Main = () => {
         <div className={`${classes.main}`}>
             <div className={classes.main__content}>
                 <Slider/>
+                <Description/>
             </div>
         </div>
     );
