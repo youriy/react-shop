@@ -6,9 +6,16 @@ body {
 }
 
 %container {
-  width: 100%;
-  max-width: 1440px;
+  max-width: 1112px;
   margin: 0 auto;
+
+  @media screen and (max-width: 1135px) {
+      margin: 0 10px;
+  }
+
+  @media screen and (max-width: 825px) {
+    margin: 0 0;
+  }
 }
 
 
@@ -54,6 +61,10 @@ body {
   .thumbs-wrapper {
     margin: 0!important;
 
+    @media screen and (max-width: 825px){
+      display: none!important;
+    }
+
     img {
       border-radius: 10px;
     }
@@ -61,5 +72,15 @@ body {
 
   .slide img {
     border-radius: 20px;
+
+    @media screen and (max-width: 825px){
+      border-radius: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 825px){
+  .carousel.carousel-slider .control-arrow {
+    display: none!important;
   }
 }

@@ -15,6 +15,11 @@
     color: $grey-color;
   }
 
+  &__mobilenav {
+    display: none!important;
+    margin: 0 10px 0 20px!important;
+  }
+
   &__navitem {
     margin: 0 17px;
     cursor: pointer;
@@ -31,6 +36,10 @@
 
   &__logo {
     margin-right: 58px;
+
+    @media screen and (max-width: 600px) {
+      margin-right: 0;
+    }
   }
 
   &__userimg {
@@ -48,6 +57,32 @@
   &__cart {
     margin-right: 46px!important;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 825px) {
+
+    height: 66px;
+    border-bottom: none;
+
+    &__navitem {
+      display: none;
+    }
+
+    &__mobilenav {
+      display: block!important;
+    }
+
+    &__userimg {
+      height: 25px;
+    }
+
+    &__cart {
+      margin-right: 23px!important;
+    }
+
+    &__userimg {
+      margin-right: 20px;
+    }
   }
 }
 

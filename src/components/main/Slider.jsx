@@ -5,14 +5,8 @@ import { Carousel } from 'react-responsive-carousel';
 import { Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.esm.js";
 import "@fancyapps/ui/dist/fancybox.css";
 
-const images = [
-    './img/image-product-1.jpg',
-    './img/image-product-2.jpg',
-    './img/image-product-3.jpg',
-    './img/image-product-4.jpg'
-];
-
-const Slider = () => {
+const Slider = (props) => {
+    const {images} = props;
 
     useEffect(() => {
         NativeFancybox.bind("[data-fancybox]", { infinite: false });
@@ -23,37 +17,35 @@ const Slider = () => {
     }, []);
 
     return (
-        <div className={classes.slider}>
-            <div className={classes.slider__container}>
-                <Carousel
-                    showArrows={false}
-                    showIndicators={false}
-                    showStatus={false}
-                    animationHandler={"fade"}
-                    swipeable={false}
-                    renderThumbs={() => {
-                        return (
-                            images.map((value, index) =>
-                                <div key={index}>
-                                    <img src={value} />
-                                </div >
-                            )
-                        );
-                    }}
-                >
-                    {
+        <div className={classes.slider__container}>
+            <Carousel
+                showArrows={true}
+                showIndicators={false}
+                showStatus={false}
+                animationHandler={"fade"}
+                swipeable={false}
+                renderThumbs={() => {
+                    return (
                         images.map((value, index) =>
-                            <div
-                                key={index}
-                                data-fancybox="gallery"
-                                data-src={value}
-                            >
+                            <div key={index}>
                                 <img src={value} />
-                            </div>
+                            </div >
                         )
-                    }
-                </Carousel>
-            </div>
+                    );
+                }}
+            >
+                {
+                    images.map((value, index) =>
+                        <div
+                            key={index}
+                            data-fancybox="gallery"
+                            data-src={value}
+                        >
+                            <img src={value} />
+                        </div>
+                    )
+                }
+            </Carousel>
         </div>
     );
 }

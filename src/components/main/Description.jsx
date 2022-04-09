@@ -4,26 +4,18 @@ import Button from '@mui/material/Button';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import IconButton from '@mui/material/IconButton';
 
-const data = {
-    brand: 'SNEAKER COMPANY',
-    title: 'Fall Limited Edition Sneakers',
-    description: 'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they`ll withstand everything the weather can offer.',
-    price: 250,
-    sale: 50
-};
-
-const Description = () => {
+const Description = (props) => {
+    const {brand, title, description, price, sale} = props.data;
 
     return (
-        <div className={classes.description}>
-            <div className={classes.description__content}>
-                <div className={classes.description__brand}>{data.brand}</div>
-                <div className={classes.description__title}>{data.title}</div>
-                <div className={classes.description__text}>{data.description}</div>
-                <Price price={data.price} sale={data.sale} />
-                <Purchase/>
-            </div>
+        <div className={classes.description__content}>
+            <div className={classes.description__brand}>{brand}</div>
+            <div className={classes.description__title}>{title}</div>
+            <div className={classes.description__text}>{description}</div>
+            <Price price={price} sale={sale} />
+            <Purchase/>
         </div>
+
     );
 }
 
@@ -42,7 +34,7 @@ const Price = (props) => {
     }
 
     return (
-        <>
+        <div className={classes.description__price_container}>
             <div className={classes.description__price}>
                 {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price*(sale/100))}
                 <span className={classes.description__sale}>{sale}%</span>
@@ -50,7 +42,7 @@ const Price = (props) => {
             <div className={classes.description__subprice}>
                 {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price)}
             </div>
-        </>
+        </div>
     );
 }
 
@@ -58,13 +50,12 @@ const Price = (props) => {
 const Purchase = () => {
 
     return (
-
         <div className={classes.description__purchase}>
             <div className={classes.description__plus_minus}>
                 <IconButton color="primary" aria-label="add to shopping cart">
                     <img src={'./img/icon-minus.svg'}/>
                 </IconButton>
-                <div>
+                <div className={classes.count}>
                     0
                 </div>
                 <IconButton color="primary" aria-label="add to shopping cart">

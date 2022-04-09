@@ -6,6 +6,7 @@
 
   &__content {
     display: flex;
+    flex-direction: row;
   }
 
   .slider {
@@ -16,6 +17,10 @@
 
     &__container {
       width: 448px;
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
   }
 
@@ -27,13 +32,26 @@
 
     &__content {
       width: 448px;
+
+      @media screen and (max-width: 999px) {
+        padding-bottom: 50px;
+      }
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+        margin: 0 20px;
+      }
     }
 
     &__brand {
       color: $orange-color;
       font-weight: 600;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       font-size: 14px;
+
+      @media screen and (max-width: 825px) {
+        margin-top: 30px;
+      }
     }
 
     &__title {
@@ -49,6 +67,16 @@
       margin-bottom: 36px;
     }
 
+    &__price_container {
+      display: flex;
+      flex-direction: column;
+
+      @media screen and (max-width: 600px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
     &__price {
       font-weight: 650;
       font-size: 32px;
@@ -61,6 +89,10 @@
       color: $grey-color;
       font-weight: 600;
       text-decoration: line-through;
+
+      @media screen and (max-width: 600px) {
+        margin-top: 7px;
+      }
     }
 
     &__sale {
@@ -75,11 +107,15 @@
     &__purchase {
       display: flex;
       margin-top: 40px;
+
+      @media screen and (max-width: 480px) {
+        flex-direction: column;
+      }
     }
 
     &__button {
-      height: 56px;
-      width: 272px;
+      height: 55px;
+      width: 277px;
       border-radius: 10px;
       margin-left: 15px;
       text-transform: none;
@@ -89,6 +125,12 @@
 
       &:hover {
         background-color: #f8ac6a;
+      }
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
       }
     }
 
@@ -101,6 +143,29 @@
       border-radius: 10px;
       align-items: center;
       justify-content: space-around;
+
+      @media screen and (max-width: 480px) {
+        width: 100%;
+      }
+
+      .count {
+        font-weight: 600;
+        font-size: 18px;
+      }
     }
+  }
+
+  @media screen and (max-width: 999px) {
+    &__content {
+      flex-direction: column;
+    }
+
+    .slider, .description {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 825px) {
+    padding-top: 0;
   }
 }

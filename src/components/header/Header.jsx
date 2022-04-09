@@ -28,6 +28,9 @@ const Header = () => {
     return (
         <div className={`${classes.header}`}>
             <div className={classes.header__nav}>
+                <IconButton className={classes.header__mobilenav}>
+                    <img src="img/icon-menu.svg"/>
+                </IconButton>
                 <div className={classes.header__logo}>
                    <img src="img/logo.svg"/>
                 </div>
