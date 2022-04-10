@@ -13,10 +13,6 @@ const Layout = () => {
             <main>
                 <Main/>
             </main>
-
-            <footer>
-
-            </footer>
         </>
     )
 }

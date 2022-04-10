@@ -79,8 +79,26 @@ body {
   }
 }
 
+.control-slider-button {
+  position: absolute!important;
+  top: 46%;
+  background-color: white!important;
+
+  img {
+    width: 10px;
+  }
+
+  &_next {
+    right: 15px;
+  }
+
+  &_prev {
+    left: 15px;
+  }
+}
+
 @media screen and (min-width: 825px){
-  .carousel.carousel-slider .control-arrow {
+  .control-slider-button {
     display: none!important;
   }
 }

@@ -2,6 +2,10 @@ import React from 'react';
 import classes from './Header.module.scss';
 import Popover from '@mui/material/Popover';
 import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 const navItems = [
     'Collections',
@@ -13,6 +17,7 @@ const navItems = [
 
 const Header = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [toggleDrawer, setToggleDrawer] = React.useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -28,7 +33,7 @@ const Header = () => {
     return (
         <div className={`${classes.header}`}>
             <div className={classes.header__nav}>
-                <IconButton className={classes.header__mobilenav}>
+                <IconButton className={classes.header__mobilenav} onClick={() => setToggleDrawer(true)}>
                     <img src="img/icon-menu.svg"/>
                 </IconButton>
                 <div className={classes.header__logo}>
@@ -63,6 +68,25 @@ const Header = () => {
                 <div className={classes.bucket__title}>Card</div>
                 <div className={classes.bucket__body}>Your card is empty</div>
             </Popover>
+
+            <Drawer
+                anchor="left"
+                open={toggleDrawer}
+                onClose={() => setToggleDrawer(false)}
+            >
+                <div className={classes.drawer}>
+                    <IconButton className={classes.header__mobilenav} onClick={() => setToggleDrawer(false)}>
+                        <img src="img/icon-close.svg"/>
+                    </IconButton>
+                    <List>
+                        {navItems.map((text, index) => (
+                            <ListItem button key={text}>
+                                <ListItemText primary={text} className={classes.drawer__text} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </div>
+            </Drawer>
         </div>
     );
 }

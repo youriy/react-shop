@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.esm.js";
 import "@fancyapps/ui/dist/fancybox.css";
+import Fab from '@mui/material/Fab';
 
 const Slider = (props) => {
     const {images} = props;
@@ -21,6 +22,20 @@ const Slider = (props) => {
             <Carousel
                 showArrows={true}
                 showIndicators={false}
+                renderArrowNext={(clickHandler, hasNext, label) =>
+                    hasNext && (
+                        <Fab className={'control-slider-button control-slider-button_next'} size="small" onClick={clickHandler}>
+                            <img src={'./img/icon-next.svg'}/>
+                        </Fab>
+                    )
+                }
+                renderArrowPrev={(clickHandler, hasPrev, label) =>
+                    hasPrev && (
+                        <Fab className={'control-slider-button control-slider-button_prev'} size="small" onClick={clickHandler}>
+                            <img src={'./img/icon-previous.svg'}/>
+                        </Fab>
+                    )
+                }
                 showStatus={false}
                 animationHandler={"fade"}
                 swipeable={false}
