@@ -6,6 +6,8 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Badge from '@mui/material/Badge';
+import {useSelector} from "react-redux";
 
 const navItems = [
     'Collections',
@@ -18,6 +20,8 @@ const navItems = [
 const Header = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [toggleDrawer, setToggleDrawer] = React.useState(false);
+    const [badge, setBadge] = React.useState(0);
+    const {items} = useSelector(state => state.card);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -26,6 +30,19 @@ const Header = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    React.useEffect(() => {
+        let count = 0
+
+        if (items.length > 0) {
+            items.forEach(item => {
+                count += item.count;
+            })
+        }
+
+        setBadge(count);
+
+    }, [items]);
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -43,7 +60,9 @@ const Header = () => {
             </div>
             <div className={classes.header__nav}>
                 <IconButton className={classes.header__cart} aria-describedby={id} onClick={handleClick}>
-                    <img src="img/icon-cart.svg"/>
+                    <Badge badgeContent={badge} color="primary">
+                        <img src="img/icon-cart.svg"/>
+                    </Badge>
                 </IconButton>
                 <div>
                     <img className={classes.header__userimg} src="img/image-avatar.png"/>

@@ -3,31 +3,27 @@ import {createSlice} from "@reduxjs/toolkit";
 const cardSlice = createSlice({
     name: "card",
     initialState: {
-        items: []
+        items: JSON.parse(localStorage.getItem('product')) || []
     },
     reducers: {
         addItem(state, action) {
-            state.items.push(action.payload);
+            let index = state.items.findIndex(it => it.id === action.payload.id);
+
+            if (index === -1 && action.payload.count > 0) {
+                state.items.push(action.payload);
+            } else if (action.payload.count === 0) {
+                state.items = state.items.filter(item => item.id !== action.payload.id);
+            } else {
+                state.items[index].count = action.payload.count;
+            }
+
+            localStorage.setItem('product', JSON.stringify(state.items))
         },
         deleteItem(state, action) {
             state.items = state.items.filter(item => item.id !== action.payload);
         },
-        incrementItemCount(state, action) {
-            state.items = state.items.map(item => {
-                if (item.id === action.payload) {
-                    item.count++;
-                }
-            });
-        },
-        decrementItemCount(state, action) {
-            state.items = state.items.filter(item => {
-               if (item.id === action.payload && item.count > 0) {
-                   item.count--;
-               }
-            });
-        }
     }
 });
 
 export default cardSlice.reducer
-export const {addItem, deleteItem, decrementItemCount, incrementItemCount} = cardSlice.actions
+export const {addItem, deleteItem} = cardSlice.actions
