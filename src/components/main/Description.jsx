@@ -17,22 +17,19 @@ const Description = (props) => {
             <Price price={price} sale={sale} />
             <Purchase product={props.data}/>
         </div>
-
     );
 }
 
 export {Description}
-
+export const NumberFormat = number => new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(number)
 
 const Price = (props) => {
     const {price, sale} = props;
 
-    const numberFormat = number => new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(number)
-
     if (sale === undefined || sale === 0) {
         return (
             <div className={classes.description__price}>
-                {numberFormat(price)}
+                {NumberFormat(price)}
             </div>
         );
     }
@@ -40,11 +37,11 @@ const Price = (props) => {
     return (
         <div className={classes.description__price_container}>
             <div className={classes.description__price}>
-                {numberFormat(price*(sale/100))}
+                {NumberFormat(price*(sale/100))}
                 <span className={classes.description__sale}>{sale}%</span>
             </div>
             <div className={classes.description__subprice}>
-                {numberFormat(price)}
+                {NumberFormat(price)}
             </div>
         </div>
     );

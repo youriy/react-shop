@@ -102,7 +102,7 @@
 .bucket__title {
   padding: 26px;
   font-weight: 700;
-  width: 360px;
+  width: 340px;
   border-bottom: hsl(220, 14%, 75%) 1px solid;
 }
 
@@ -112,4 +112,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+
+.checkout__button {
+  height: 55px;
+  width: 300px;
+  border-radius: 10px!important;
+  text-transform: none!important;
+  font-weight: 600!important;
+  background-color: $orange-color!important;
+  font-family: 'Kumbh Sans', sans-serif!important;
+
+  &:hover {
+    background-color: #f8ac6a!important;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 280px;
+  }
 }

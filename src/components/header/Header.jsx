@@ -7,7 +7,13 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Badge from '@mui/material/Badge';
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import {NumberFormat} from '../main/Description.jsx'
+import {deleteItem} from "../../store/cardSlice";
+import Button from "@mui/material/Button";
 
 const navItems = [
     'Collections',
@@ -22,6 +28,7 @@ const Header = () => {
     const [toggleDrawer, setToggleDrawer] = React.useState(false);
     const [badge, setBadge] = React.useState(0);
     const {items} = useSelector(state => state.card);
+    const dispatch = useDispatch();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -85,7 +92,56 @@ const Header = () => {
                 sx={{marginTop: 3}}
             >
                 <div className={classes.bucket__title}>Card</div>
-                <div className={classes.bucket__body}>Your card is empty</div>
+                {items.length > 0 ? (
+                    <div>
+                        <List sx={{ width: '100%', maxWidth: 380, bgcolor: 'background.paper' }}>
+                            {items.map(item =>
+                                <ListItem
+                                    key={item.id}
+                                    alignItems="flex-start"
+                                    secondaryAction={
+                                        <IconButton
+                                            onClick={() => dispatch(deleteItem(item.id))}
+                                        >
+                                            <img src={'./img/icon-delete.svg'}/>
+                                        </IconButton>
+                                    }
+                                >
+                                    <ListItemAvatar>
+                                        <Avatar variant="rounded" alt={item.title} src={item.img[0]} />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={item.title}
+                                        secondary={
+                                            <React.Fragment>
+                                                {NumberFormat(item.sale > 0 ? item.price*(item.sale/100) : item.price)} x {item.count}
+                                                <Typography
+                                                    sx={{ display: 'inline' }}
+                                                    component="span"
+                                                    variant="body2"
+                                                    color="text.primary"
+                                                >
+                                                    {' ' + NumberFormat((item.sale > 0 ? item.price*(item.sale/100) : item.price)*item.count)}
+                                                </Typography>
+                                            </React.Fragment>
+                                        }
+                                    />
+                                </ListItem>
+                            )}
+                        </List>
+                        <div className={classes.checkout}>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                className={classes.checkout__button}
+                            >
+                                Checkout
+                            </Button>
+                        </div>
+                    </div>
+                ) : (
+                    <div className={classes.bucket__body}>Your card is empty</div>
+                )}
             </Popover>
 
             <Drawer
