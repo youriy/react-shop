@@ -93,42 +93,23 @@ const Header = () => {
             >
                 <div className={classes.bucket__title}>Card</div>
                 {items.length > 0 ? (
-                    <div>
-                        <List sx={{ width: '100%', maxWidth: 380, bgcolor: 'background.paper' }}>
-                            {items.map(item =>
-                                <ListItem
-                                    key={item.id}
-                                    alignItems="flex-start"
-                                    secondaryAction={
-                                        <IconButton
-                                            onClick={() => dispatch(deleteItem(item.id))}
-                                        >
-                                            <img src={'./img/icon-delete.svg'}/>
-                                        </IconButton>
-                                    }
-                                >
-                                    <ListItemAvatar>
-                                        <Avatar variant="rounded" alt={item.title} src={item.img[0]} />
-                                    </ListItemAvatar>
-                                    <ListItemText
-                                        primary={item.title}
-                                        secondary={
-                                            <React.Fragment>
-                                                {NumberFormat(item.sale > 0 ? item.price*(item.sale/100) : item.price)} x {item.count}
-                                                <Typography
-                                                    sx={{ display: 'inline' }}
-                                                    component="span"
-                                                    variant="body2"
-                                                    color="text.primary"
-                                                >
-                                                    {' ' + NumberFormat((item.sale > 0 ? item.price*(item.sale/100) : item.price)*item.count)}
-                                                </Typography>
-                                            </React.Fragment>
-                                        }
-                                    />
-                                </ListItem>
-                            )}
-                        </List>
+                    <div className={classes.busket__content}>
+                        {items.map(item =>
+                            <div className={classes.bucket__item} key={item.id}>
+                                <img className={classes.bucket__img} src={item.img[0]}/>
+                                <div className={classes.bucket__description}>
+                                    <div className={classes.bucket__name}>{item.title}</div>
+                                    <div className={classes.bucket__name}>
+                                        {NumberFormat(item.sale > 0 ? item.price*(item.sale/100) : item.price)} x {item.count}
+                                        <span>{' ' + NumberFormat((item.sale > 0 ? item.price*(item.sale/100) : item.price)*item.count)}</span>
+                                    </div>
+                                </div>
+                                <IconButton onClick={() => dispatch(deleteItem(item.id))}>
+                                    <img src={'./img/icon-delete.svg'}/>
+                                </IconButton>
+                            </div>
+                        )}
+
                         <div className={classes.checkout}>
                             <Button
                                 variant="contained"

@@ -4,7 +4,7 @@ import {Slider} from "./Slider.jsx";
 import {Description} from "./Description.jsx"
 
 const data = {
-    id: 11,
+    id: 12,
     brand: 'SNEAKER COMPANY',
     title: 'Fall Limited Edition Sneakers',
     description: 'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they`ll withstand everything the weather can offer.',
