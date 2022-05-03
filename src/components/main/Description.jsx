@@ -12,8 +12,8 @@ const Description = (props) => {
     return (
         <div className={classes.description__content}>
             <div className={classes.description__brand}>{brand}</div>
-            <div className={classes.description__title}>{title}</div>
-            <div className={classes.description__text}>{description}</div>
+            <h1 className={classes.description__title}>{title}</h1>
+            <p className={classes.description__text}>{description}</p>
             <Price price={price} sale={sale} />
             <Purchase product={props.data}/>
         </div>
