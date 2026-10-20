@@ -1,20 +1,16 @@
-import React from 'react';
 import {Header} from "./header/Header.jsx";
 import {Main} from "./main/Main.jsx";
 
-const Layout = () => {
+const Layout = () => (
+    <>
+        <header>
+            <Header/>
+        </header>
 
-    return (
-        <>
-            <header>
-                <Header/>
-            </header>
+        <main>
+            <Main/>
+        </main>
+    </>
+);
 
-            <main>
-                <Main/>
-            </main>
-        </>
-    )
-}
-
-export {Layout}
+export {Layout};

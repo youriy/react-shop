@@ -1,150 +1,69 @@
-import React from 'react';
-import classes from './Header.module.scss';
-import Popover from '@mui/material/Popover';
-import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import {useState} from 'react';
+import {useSelector} from 'react-redux';
 import Badge from '@mui/material/Badge';
-import {useSelector, useDispatch} from "react-redux";
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import {NumberFormat} from '../main/Description.jsx'
-import {deleteItem} from "../../store/cardSlice";
-import Button from "@mui/material/Button";
-
-const navItems = [
-    'Collections',
-    'Men',
-    'Women',
-    'About',
-    'Contact'
-];
+import IconButton from '@mui/material/IconButton';
+import classes from './Header.module.scss';
+import {CartPopover} from './CartPopover.jsx';
+import {NavDrawer} from './NavDrawer.jsx';
+import {navItems} from '../../data/navItems.js';
+import {selectCartTotalCount} from '../../store/selectors.js';
 
 const Header = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [toggleDrawer, setToggleDrawer] = React.useState(false);
-    const [badge, setBadge] = React.useState(0);
-    const {items} = useSelector(state => state.card);
-    const dispatch = useDispatch();
+    const [cartAnchorEl, setCartAnchorEl] = useState(null);
+    const [isNavOpen, setIsNavOpen] = useState(false);
+    const cartCount = useSelector(selectCartTotalCount);
+    const isCartOpen = Boolean(cartAnchorEl);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    React.useEffect(() => {
-        let count = 0
-
-        if (items.length > 0) {
-            items.forEach(item => {
-                count += item.count;
-            })
-        }
-
-        setBadge(count);
-
-    }, [items]);
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const openCart = event => setCartAnchorEl(event.currentTarget);
+    const closeCart = () => setCartAnchorEl(null);
 
     return (
-        <div className={`${classes.header}`}>
+        <div className={classes.header}>
             <div className={classes.header__nav}>
-                <IconButton className={classes.header__mobilenav} onClick={() => setToggleDrawer(true)}>
-                    <img src="img/icon-menu.svg"/>
+                <IconButton
+                    className={classes.header__mobilenav}
+                    aria-label="Open navigation menu"
+                    onClick={() => setIsNavOpen(true)}
+                >
+                    <img src="img/icon-menu.svg" alt=""/>
                 </IconButton>
+
                 <div className={classes.header__logo}>
-                   <img src="img/logo.svg"/>
+                    <img src="img/logo.svg" alt="Sneaker Company"/>
                 </div>
-                {navItems.map(value => <div key={value} className={classes.header__navitem}>{value}</div>)}
+
+                {navItems.map(item => (
+                    <button key={item} type="button" className={classes.header__navitem}>
+                        {item}
+                    </button>
+                ))}
             </div>
+
             <div className={classes.header__nav}>
-                <IconButton className={classes.header__cart} aria-describedby={id} onClick={handleClick}>
-                    <Badge badgeContent={badge} color="primary">
-                        <img src="img/icon-cart.svg"/>
+                <IconButton
+                    className={classes.header__cart}
+                    aria-label="Open cart"
+                    aria-describedby={isCartOpen ? 'cart-popover' : undefined}
+                    onClick={openCart}
+                >
+                    <Badge badgeContent={cartCount} color="primary">
+                        <img src="img/icon-cart.svg" alt=""/>
                     </Badge>
                 </IconButton>
-                <div>
-                    <img className={classes.header__userimg} src="img/image-avatar.png"/>
-                </div>
+
+                <img className={classes.header__userimg} src="img/image-avatar.png" alt="User profile"/>
             </div>
 
-            <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                sx={{marginTop: 3}}
-            >
-                <div className={classes.bucket__title}>Card</div>
-                {items.length > 0 ? (
-                    <div className={classes.busket__content}>
-                        {items.map(item =>
-                            <div className={classes.bucket__item} key={item.id}>
-                                <img className={classes.bucket__img} src={item.img[0]}/>
-                                <div className={classes.bucket__description}>
-                                    <div className={classes.bucket__name}>{item.title}</div>
-                                    <div className={classes.bucket__name}>
-                                        {NumberFormat(item.sale > 0 ? item.price*(item.sale/100) : item.price)} x {item.count}
-                                        <span>{' ' + NumberFormat((item.sale > 0 ? item.price*(item.sale/100) : item.price)*item.count)}</span>
-                                    </div>
-                                </div>
-                                <IconButton onClick={() => dispatch(deleteItem(item.id))}>
-                                    <img src={'./img/icon-delete.svg'}/>
-                                </IconButton>
-                            </div>
-                        )}
+            <CartPopover
+                id="cart-popover"
+                open={isCartOpen}
+                anchorEl={cartAnchorEl}
+                onClose={closeCart}
+            />
 
-                        <div className={classes.checkout}>
-                            <Button
-                                variant="contained"
-                                size="large"
-                                className={classes.checkout__button}
-                            >
-                                Checkout
-                            </Button>
-                        </div>
-                    </div>
-                ) : (
-                    <div className={classes.bucket__body}>Your card is empty</div>
-                )}
-            </Popover>
-
-            <Drawer
-                anchor="left"
-                open={toggleDrawer}
-                onClose={() => setToggleDrawer(false)}
-            >
-                <div className={classes.drawer}>
-                    <IconButton className={classes.header__mobilenav} onClick={() => setToggleDrawer(false)}>
-                        <img src="img/icon-close.svg"/>
-                    </IconButton>
-                    <List>
-                        {navItems.map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemText primary={text} className={classes.drawer__text} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </div>
-            </Drawer>
+            <NavDrawer open={isNavOpen} onClose={() => setIsNavOpen(false)}/>
         </div>
     );
-}
+};
 
-export {Header}
+export {Header};

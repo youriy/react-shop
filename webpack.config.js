@@ -1,15 +1,19 @@
 const path = require("path");
 
 module.exports = {
-    entry: ['babel-polyfill', "./src/App.jsx"],
+    entry: ['babel-polyfill', "./src/index.jsx"],
     output: {
-        path: __dirname + "/public",
+        path: path.resolve(__dirname, "public"),
         filename: "bundle.js",
     },
     devServer: {
+        static: path.resolve(__dirname, "public"),
         historyApiFallback: true,
         port: 301,
         open: true,
+    },
+    resolve: {
+        extensions: [".js", ".jsx"],
     },
     module: {
         rules: [
@@ -18,7 +22,10 @@ module.exports = {
                 exclude: /(node_modules)/,
                 loader: "babel-loader",
                 options: {
-                    presets: ["@babel/preset-env", "@babel/preset-react"],
+                    presets: [
+                        "@babel/preset-env",
+                        ["@babel/preset-react", {runtime: "automatic"}],
+                    ],
                 },
             },
             {

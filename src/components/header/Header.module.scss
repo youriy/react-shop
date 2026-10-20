@@ -1,11 +1,11 @@
-@import "src/scss/app";
+@import "src/scss/mixins";
 
 .header {
-  @extend %container;
+  @include container;
   height: 113px;
   display: flex;
   justify-content: space-between;
-  border-bottom: hsl(220, 14%, 75%) 2px solid;
+  border-bottom: $border-color 2px solid;
 
   &__nav {
     display: flex;
@@ -16,21 +16,26 @@
   }
 
   &__mobilenav {
-    display: none!important;
-    margin: 0 10px 0 20px!important;
+    display: none !important;
+    margin: 0 10px 0 20px !important;
   }
 
   &__navitem {
     margin: 0 17px;
-    cursor: pointer;
+    padding: 0;
     display: flex;
     align-items: center;
     height: 97%;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
     border-bottom: 5px transparent solid;
+    cursor: pointer;
 
     &:hover {
       color: black;
-      border-bottom: 5px $orange-color solid;
+      border-bottom-color: $orange-color;
     }
   }
 
@@ -55,7 +60,7 @@
   }
 
   &__cart {
-    margin-right: 46px!important;
+    margin-right: 46px !important;
     cursor: pointer;
   }
 
@@ -69,19 +74,16 @@
     }
 
     &__mobilenav {
-      display: block!important;
+      display: block !important;
     }
 
     &__userimg {
       height: 25px;
+      margin-right: 20px;
     }
 
     &__cart {
-      margin-right: 23px!important;
-    }
-
-    &__userimg {
-      margin-right: 20px;
+      margin-right: 23px !important;
     }
   }
 }
@@ -89,92 +91,90 @@
 .drawer {
   width: 250px;
 
+  &__close {
+    display: block !important;
+    margin: 0 10px 0 20px !important;
+  }
+
   &__text {
     span {
-      font-family: 'Kumbh Sans', sans-serif!important;
-      color: black!important;
-      font-weight: 700!important;
+      font-family: 'Kumbh Sans', sans-serif !important;
+      color: black !important;
+      font-weight: 700 !important;
       margin-left: 10px;
     }
   }
 }
 
-.bucket__title {
-  padding: 26px;
-  font-weight: 700;
-  width: 340px;
-  border-bottom: hsl(220, 14%, 75%) 1px solid;
-}
-
-.bucket__body {
-  padding: 26px;
-  height: 188px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bucket__item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 12px 24px;
-}
-
-.bucket__name {
-  color: $grey-color;
-  font-weight: 500;
-  line-height: 1.5;
-
-  @media screen and (max-width: 400px) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 175px;
+.cart {
+  &__title {
+    padding: 26px;
+    font-weight: 700;
+    width: 340px;
+    border-bottom: $border-color 1px solid;
   }
 
-  span {
+  &__empty {
+    padding: 26px;
+    height: 188px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 12px 24px;
+  }
+
+  &__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+  }
+
+  &__description {
+    margin: 0 15px;
+    width: 238px;
+
+    @media screen and (max-width: 400px) {
+      width: auto;
+    }
+  }
+
+  &__name,
+  &__price {
+    color: $grey-color;
+    font-weight: 500;
+    line-height: 1.5;
+
+    @media screen and (max-width: 400px) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 175px;
+    }
+  }
+
+  &__total {
     font-weight: 600;
     color: black;
   }
-}
 
-.bucket__description {
-  margin: 0 15px;
-  width: 238px;
-
-  @media screen and (max-width: 400px) {
-    width: auto;
-  }
-}
-
-.bucket__img {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
-}
-
-.checkout {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 25px;
-  padding-top: 10px;
-}
-
-.checkout__button {
-  height: 55px;
-  width: 340px;
-  border-radius: 10px!important;
-  text-transform: none!important;
-  font-weight: 600!important;
-  background-color: $orange-color!important;
-  font-family: 'Kumbh Sans', sans-serif!important;
-
-  &:hover {
-    background-color: #f8ac6a!important;
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 25px;
   }
 
-  @media screen and (max-width: 420px) {
-    width: 280px;
+  &__button {
+    @include primary-button;
+    width: 340px;
+
+    @media screen and (max-width: 420px) {
+      width: 280px;
+    }
   }
 }
